@@ -1,23 +1,17 @@
 package com.example.springproject.repository;
 
+import com.example.springproject.domain.Order;
 import com.example.springproject.domain.*;
 import lombok.val;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.mockito.internal.matchers.Or;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -45,6 +39,13 @@ class OrderItemRepositoryTest {
         orderRepository.save(order);
         productRepository.save(product);
         productRepository.save(product2);
+    }
+
+    @AfterAll
+    void deleteAll(){
+        orderRepository.deleteById(order.getId());
+        productRepository.deleteById(product.getId());
+        productRepository.deleteById(product2.getId());
     }
 
     @BeforeEach

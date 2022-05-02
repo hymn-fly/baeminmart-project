@@ -56,8 +56,12 @@ public class OrderRepository {
         }
     }
 
-    public void deleteById(UUID id){
+    public Optional<Order> deleteById(UUID id){
+        val ret = this.findById(id);
+
         jdbcTemplate.update("DELETE FROM orders WHERE id = ?", Utils.UuidToBytes(id));
+
+        return ret;
     }
 
     public Order rowMapper(ResultSet rs, int rowNum) throws SQLException {

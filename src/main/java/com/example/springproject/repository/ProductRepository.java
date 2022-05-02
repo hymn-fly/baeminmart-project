@@ -24,7 +24,8 @@ public class ProductRepository {
     }
 
     public Product save(Product product){
-        int update = jdbcTemplate.update("INSERT INTO product (id, name, price) values (?, ?, ?)", Utils.UuidToBytes(product.getId()), product.getName(), product.getPrice());
+        int update = jdbcTemplate.update("INSERT INTO product (id, name, img_url, price) values (?, ?, ?, ?)",
+                Utils.UuidToBytes(product.getId()), product.getName(), product.getImgUrl(), product.getPrice());
         checkArgument(update == 1, "저장되지 않았습니다");
         return product;
     }
@@ -49,8 +50,9 @@ public class ProductRepository {
     public Product rowMapper(ResultSet rs, int rowNum) throws SQLException {
         UUID id = Utils.BytesToUuid(rs.getBytes("id"));
         String name = rs.getString("name");
+        String imgUrl = rs.getString("img_url");
         long price = rs.getLong("price");
 
-        return new Product(id, name, price);
+        return new Product(id, name, imgUrl, price);
     }
 }
