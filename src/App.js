@@ -24,6 +24,18 @@ function Main() {
         axios.get("http://localhost:8080/api/v1/products")
             .then(v => setProducts(v.data));
     }, []);
+    const handleAddClicked = id => {
+        const product = products.find(v => v.id === id);
+        const found = items.find(v => v.id === id);
+        const updatedItems =
+            found ? items.map(v => (v.id === id) ? {...v, count: v.count + 1} : v ) : [...items, { ...product, count:1 }]
+        setItems(updatedItems);
+        console.log(products.find(v => v.id === id), "added!");
+    }
+
+    const onBinAdd = (e) => {
+
+    }
 
   return (
       <div className="container-fluid">

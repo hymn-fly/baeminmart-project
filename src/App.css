@@ -46,6 +46,10 @@ img {
 hr {
   margin-top: 1.25rem
 }
+
+li{
+  margin: 20px 0px
+}
 .products {
   width: 100%;
 }

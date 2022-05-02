@@ -1,7 +1,7 @@
 import React from "react";
 import {Product} from "./Product";
 
-export function ProductList({products = []}) {
+export function ProductList({products = [], onBinAdd}) {
 
     return (
         <React.Fragment>
@@ -9,7 +9,7 @@ export function ProductList({products = []}) {
             <ul className="list-group products">
                 {products.map(v =>
                     <li key={v.id} className="list-group-item d-flex mt-3">
-                        <Product {...v} />
+                        <Product product={v} onBinAdd={onBinAdd} />
                     </li>
                 )}
             </ul>
