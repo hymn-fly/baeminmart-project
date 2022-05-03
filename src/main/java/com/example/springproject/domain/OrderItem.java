@@ -2,6 +2,8 @@ package com.example.springproject.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -13,7 +15,7 @@ public class OrderItem {
     /* 아이템 아이디 */
     private final UUID id;
     /* 주문 아이디 */
-    private final UUID orderId;
+    private UUID orderId;
 
     /* 상품 아이디 */
     private final UUID productId;
@@ -32,4 +34,18 @@ public class OrderItem {
         this.productId = productId;
         this.productCount = productCount;
     }
+
+    public OrderItem(UUID productId, long productCount){
+        checkArgument(productId!= null, "상품 id 는 null 일 수 없습니다.");
+        checkArgument(productCount > 0, "상품 갯수는 0 개보다 커야 합니다.");
+
+        this.id = UUID.randomUUID();
+        this.productId = productId;
+        this.productCount = productCount;
+    }
+
+    public void setOrderId(UUID orderId){
+        this.orderId = orderId;
+    }
+
 }

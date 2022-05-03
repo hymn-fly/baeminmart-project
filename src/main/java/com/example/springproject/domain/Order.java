@@ -33,4 +33,8 @@ public class Order {
         this.email = email;
         this.address = address;
     }
+
+    public Order(String customerName, Email email, String address) {
+        this(UUID.randomUUID(), OrderStatus.ACCEPTED, LocalDateTime.now(), customerName, email, address);
+    }
 }
